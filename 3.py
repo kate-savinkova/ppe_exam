@@ -22,7 +22,7 @@ def findStudentByID(titleProject_id, students):
   flag = 0
   for student in students:
     if (int(student['titleProject_id']) == int(titleProject_id)):
-      print('Проект № ' + student['titleProject_id'] + ' делал: ' + student['name'].split()[1][0] + '.' + student['name'].split()[0] + '\nОн(а) получил(а) оценку ' + student['score'])
+      print('Проект №' + student['titleProject_id'] + ' делал: ' + student['name'].split()[1][0] + '.' + student['name'].split()[0] + ' он(а) получил(а) оценку - ' + student['score'] + '.')
       flag = 1
       break
   if (flag == 0):
