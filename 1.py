@@ -59,5 +59,4 @@ def writeFile(filename, students, average):
 students = readFile("students.csv")
 findVladimir(students)
 average = findAverage(students)
-print(average)
 writeFile("students_new.csv", students, average)
