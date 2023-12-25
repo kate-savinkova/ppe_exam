@@ -47,5 +47,5 @@ def writeFile(filename, students):
     for student in students:
       file_writer.writerow([student['id'], student['name'], student['titleProject_id'], student['class'], student['score'], generate_login(student), generate_password(8)])
 
-students = readFile("student.csv")
+students = readFile("students.csv")
 writeFile("students_password.csv", students)

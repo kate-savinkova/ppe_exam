@@ -48,7 +48,7 @@ def output(list):
   print("2 место: " + list[len(list) - 2]['name'].split(' ')[1][0] + '.' + list[len(list) - 2]['name'].split(' ')[0])
   print("3 место: " + list[len(list) - 3]['name'].split(' ')[1][0] + '.' + list[len(list) - 3]['name'].split(' ')[0])
 
-students = readFile("student.csv")
+students = readFile("students.csv")
 replace_null(students)
 insertion_sort(students, 'score')
 output(students)

@@ -39,5 +39,5 @@ def SearchingForStudents(students):
     findStudentByID(id, students)
     id = input()
 
-students = readFile("student.csv")
+students = readFile("students.csv")
 SearchingForStudents(students)

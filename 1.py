@@ -56,8 +56,8 @@ def writeFile(filename, students, average):
       file_writer.writerow([student['id'], student['name'], student['titleProject_id'], student['class'], student['score']])
 
 # запускаем выполнение необходимых функций
-students = readFile("student.csv")
+students = readFile("students.csv")
 findVladimir(students)
 average = findAverage(students)
 print(average)
-writeFile("student_new.csv", students, average)
+writeFile("students_new.csv", students, average)
