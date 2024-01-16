@@ -21,7 +21,7 @@ def generate_hash(s):
   """
   alphabet = [chr(i) for i in range(1040, 1104)]
   alphabet.append(' ')
-  d = {l: i for i, l in enumerate(alphabet,1)}
+  d = {letter: i for i, letter in enumerate(alphabet,1)}
   p = 67
   m = pow(10, 9) + 9
   hash_value = 0
