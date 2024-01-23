@@ -20,15 +20,13 @@ def replace_ids_with_hashes(input_file_path, output_file_path, A, m):
             for row in reader:
                 row['hash'] = multiplicative_hash(row['name'], A, m)
                 writer.writerow(row)
-
-                # For testing purposes, let's also print the row to ensure it's being written correctly
-                print(row)  
+ 
     print(f"Хеширование завершено. Результат сохранен в файл: {output_file_path}")
 
 
 # Чтение данных из CSV файла и замена идентификаторов на хеши
 input_file_path = 'visitors.csv'
-output_file_path = 'visitors_new.csv'
+output_file_path = 'visitors_with_hash.csv'
 A = 31  # выбранный коэффициент умножения
 m = 118  # размер хеш-таблицы
 

@@ -10,7 +10,8 @@ def readVisitors(filename):
   with open(filename, "r", encoding='utf-8') as file:
     reader = csv.DictReader(file, delimiter=',')
     for visitor in reader:
-      visitors.append({'ticket_number': int(visitor['ticket_number']), 'name': visitor['name'], 'exhibition_passed': visitor['exhibition_passed']})
+      # visitors.append({'ticket_number': int(visitor['ticket_number']), 'name': visitor['name'], 'exhibition_passed': visitor['exhibition_passed']})
+      visitors.append(visitor)
   return visitors
 
 def findIvan(visitor_data):
@@ -31,17 +32,17 @@ def calculatePercentages(visitor_data):
   Keyword arguments:
   visitor_data -- List of dictionaries representing visitors and their ticket information
   """
-  total_visitors = 0
-  for visitor in visitor_data:
-    if visitor['exhibition_passed'].lower() != 'none':
-      total_visitors += 1
+  # total_visitors = 0
+  # for visitor in visitor_data:
+  #   if visitor['exhibition_passed'].lower() != 'none':
+  #     total_visitors += 1
+  total_visitors = sum(1 for visitor in visitor_data if visitor['exhibition_passed'].lower() != 'none')
   passed_visitors = sum(1 for visitor in visitor_data if visitor['exhibition_passed'].lower() == 'true')
   percentage_passed = (passed_visitors / total_visitors) * 100 if total_visitors > 0 else 0.0
-  percentage_not_passed = 100 - percentage_passed
 
-  return percentage_passed, percentage_not_passed
+  return percentage_passed
 
-def correctData(visitor_data, percentage_passed, percentage_not_passed):
+def correctData(visitor_data, percentage_passed):
   """Correct data based on the majority percentage.
 
   Keyword arguments:
@@ -49,7 +50,7 @@ def correctData(visitor_data, percentage_passed, percentage_not_passed):
   percentage_passed -- Percentage of visitors who passed the exhibition
   percentage_not_passed -- Percentage of visitors who did not pass the exhibition
   """
-  majority_passed = percentage_passed > percentage_not_passed
+  majority_passed = percentage_passed >= 50
 
   for visitor in visitor_data:
     if visitor['exhibition_passed'].lower() == 'none':
@@ -64,9 +65,9 @@ def writeVisitors(filename, visitor_data):
   """
   with open(filename, mode="w", encoding='utf-8') as w_file:
     file_writer = csv.writer(w_file, delimiter=",")
-    file_writer.writerow(["ticket_number", "name", "exhibition_passed"])
+    file_writer.writerow(['ticket_number','name','age','exhibition_passed'])
     for visitor in visitor_data:
-      file_writer.writerow([visitor['ticket_number'], visitor['name'], visitor['exhibition_passed']])
+      file_writer.writerow([visitor['ticket_number'], visitor['name'], visitor['age'], visitor['exhibition_passed']])
 
 # Run the necessary functions
 filename = "visitors.csv"
@@ -76,8 +77,8 @@ visitors = readVisitors(filename)
 findIvan(visitors)
 
 # Calculate percentages and correct data
-percentage_passed, percentage_not_passed = calculatePercentages(visitors)
-correctData(visitors, percentage_passed, percentage_not_passed)
+percentage_passed = calculatePercentages(visitors)
+correctData(visitors, percentage_passed)
 
 # Write the corrected data to a new file
 writeVisitors("visitors_new.csv", visitors)

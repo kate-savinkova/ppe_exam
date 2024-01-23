@@ -10,7 +10,7 @@ def readVisitors(filename):
     with open(filename, "r", encoding='utf-8') as file:
         reader = csv.DictReader(file, delimiter=',')
         for visitor in reader:
-            visitors.append({'ticket_number': int(visitor['ticket_number']), 'name': visitor['name'], 'age': int(visitor['age']), 'exhibition_passed': visitor['exhibition_passed']})
+            visitors.append(visitor)
     return visitors
 
 def selectionSortByAge(visitors):
@@ -34,7 +34,7 @@ def printTop3Youngest(visitors):
     visitors -- List of dictionaries representing visitors and their information
     """
     print("Топ-3 посетителей с наименьшим возрастом:")
-    for i in range(min(3, len(visitors))):
+    for i in range(3):
         place = i + 1
         name = visitors[i]['name']
         print(f"{place} место: {name}")
